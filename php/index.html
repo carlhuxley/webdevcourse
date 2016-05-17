@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Local Weather App</title>
+
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <style>
+
+      html, body {
+        text-align: center;
+        height: 100%;
+              }
+
+      h1 {
+        color:red;
+        margin-bottom: 0;
+        font-size: 3.0em;
+      }
+
+      h2 {
+        color:red;
+        margin-top: 10px;
+        font-size: 2.0em;
+      }
+
+      .container {
+        background-image: url("img/background.jpg");
+        background-size: cover;
+        background-position: center;
+        height: 100%;
+        width: 100%;
+        margin:  0 auto;
+        padding-top: 5%;
+      }
+
+      .center {
+
+      }
+
+      .white {
+        color: white;
+      }
+
+      .whitebackground {
+        background-color:white;
+        padding: 20px;
+        border-radius: 15px;
+      }
+
+      .infobox {
+        background-color:rgba(255, 255, 255, 0.7);;
+        margin: 50px auto;
+        font-weight: bold;
+        padding: 20px;
+        border-radius: 10px;
+        color:black;
+        width: 50%;
+      }
+
+      p {
+        padding-top: 15px;
+        padding-bottom: 15px;
+      }
+
+      button {
+        margin-top: 0px;
+        background-color: #f47f09;
+        border: none;
+        border-radius: 5px;
+        color: white;
+      }
+
+      .alert {
+          margin-top: 20px;
+          display: none;
+      }
+
+      #location {
+          font-size: 1.7em;
+          line-height: 1.1em;
+      }
+
+      #description {
+        font-size: 1.5em;
+        margin-top: -6px;
+        line-height: 1.0em;
+            }
+
+      #temperature {
+        font-size: 1.2em;
+        margin: 10px 0 -2px 0;
+      }
+
+    </style>
+  </head>
+  <body>
+      <div class="container">
+        <h1>Free Code Camp</h1>
+        <h2>Local Weather App</h2>
+        <div class="infobox">
+            <div id="location" class="bold" ></div>
+            <div id="weatherIcon"></div>
+            <div id="description"></div>
+            <div id="temperature"></div>
+                  <button id="tempButton"type ="button">&degC/&degF</button>
+        </div>
+      </div>
+
+<!--A degrees Celsius/Farenhieht toggle button-->
+
+<!--display your current location and the weather conditions-->
+
+    </div>
+
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js">
+    </script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
+
+    <script>
+    $(".contentContainer").css("min-height",$(window).height());
+    </script>
+    <script>
+    var tempUnit = "metric";
+    var temp = 0;
+$(function(){
+		$('#tempButton').click(function(){
+			var iteration=$(this).data('iteration')||1
+			switch ( iteration) {
+				case 1:
+        tempUnit = "imperial";
+        tempf = (temp * 1.8 + 32).toFixed(2);
+        $("#temperature").html(tempf + "&degF");
+					break;
+
+				case 2:
+        tempUnit= "metric"
+          $("#temperature").html(temp + "&degC");
+					break;
+			}
+			iteration++;
+			if (iteration>2) iteration=1
+			$(this).data('iteration',iteration)
+		})
+	})
+
+$(document).ready(function(){
+
+  //get current location of users
+  // check for Geolocation support
+  if (navigator.geolocation) {
+    console.log('Geolocation is supported!');
+  }
+  else {
+    console.log('Geolocation is not supported for this Browser/OS version yet.');
+  }
+window.onload = function() {
+
+  var startPos;
+
+  var geoSuccess = function(position) {
+    startPos = position;
+    latLong = "lat=" + startPos.coords.latitude + "&lon=" + startPos.coords.longitude;
+    var api = 'http://api.openweathermap.org/data/2.5/weather?';
+    var apiKey = '&appid=e7f7a0fd415caaf614569e4b18be50ca';
+    var unit = '&units=' + tempUnit;
+    var queryString = api + latLong + apiKey + unit;
+    //document.getElementById('coordinates').innerHTML = queryString;
+/* Call to the openweather api to return weather data.*/
+    $.ajax({url: queryString, success: function(result){
+   $("#location").html(result.name + ", " + result.sys.country);
+   $("#description").html( result.weather[0].description);
+   $("#temperature").html(result.main.temp + '&degC')
+   /*$("#temperature").html("<p>" + result.weather[0].description + "Temperature: " + result.main.temp +"&deg;C</p>")*/
+   temp = result.main.temp;
+   //Weather icons change depending on the weather conditions
+   var iconPng = result.weather[0].icon + '.png';
+   var imageSrc = 'http://openweathermap.org/img/w/' + iconPng;
+
+   $("#weatherIcon").html('<img src =\"' + imageSrc + '\"/>');
+
+ }});
+};
+
+navigator.geolocation.getCurrentPosition(geoSuccess);
+
+}});
+
+//use the .style.background-image(url) to change the background image displayed. easily test this one
+
+    </script>
+  </body>
+</html>

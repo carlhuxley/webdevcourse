@@ -1,0 +1,389 @@
+<!doctype html>
+<html>
+<head>
+    <title>Carl's BBC</title>
+
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+<style>
+
+body{
+  margin: 0;
+  font-family: Arial, Helmet, Freesans, sans-serif;
+}
+ .fixedwidth {
+   width:1050px;
+   margin:0 auto;
+
+ }
+#topnav {
+  background-color: #7B0000;
+  width:100%;
+  height:40px;
+  margin:0;
+  color:white;
+}
+
+#logodiv {
+  padding-top: 5px;
+  float:left;
+  border-right: 2px solid #990000;
+  padding-right: 5px;
+}
+
+#signindiv {
+  width: 150px;
+  height: 40px;
+  float:left;
+  border-right: 2px solid #990000;
+}
+
+#topmenudiv {
+  float:left;
+}
+
+#topmenudiv ul {
+  margin:0;
+  padding: 0;
+}
+
+#topmenudiv li {
+  list-style: none;
+  font-weight: bold;
+  font-size: 0.9em;
+  border-right: 1px solid #990000;
+  padding: 10px 20px 13px 20px;
+  float: left;
+}
+
+#searchdiv {
+  float: left;
+  padding:10px;
+
+}
+
+#searchdiv input {
+  height: 20px;
+  border:none;
+  padding: 0 0 0 10px;
+  background-image: url("images/magnify.png");
+  background-repeat: no-repeat;
+  background-position: right center;
+  background-size: 10%;
+}
+
+.break {
+  clear: both;
+}
+
+#newsnav {
+  background-color: #990000;
+  width:100%;
+  height:90px;
+  margin:0;
+  color:white;
+}
+
+#newsnav p {
+  margin: 0;
+  padding-top: 7px;
+  padding-left: 2px;
+  float:left;
+}
+
+#newsheader {
+  font-size: 3em;
+}
+
+#uk {
+  font-size: 0.7em;
+}
+
+#rssdiv {
+  float:right;
+  margin-top: 30px;
+  margin-right: 35px;
+}
+
+#rssdiv img {
+  height: 12px;
+  padding-top: 5px;
+}
+
+#topicmenu ul {
+  background-color: #3E0C0D;
+  margin-left: 3px;
+  margin-top: 3px;
+  float: left;
+  height: 20px;
+  padding: 5px 0 0 5px;
+}
+
+#topicmenu li {
+  list-style: none;
+  font-size: 0.8em;
+  border-right: 1px solid #990000;
+  padding: 0 9px 0 9px;
+  float: left;
+}
+
+.selected {
+  background-color: #EDEDED;
+  color : #444444;
+  height: 19px;
+  position: relative;
+  top: -5px;
+  padding-top: 6px !important;
+}
+
+#content {
+  width:100%;
+  margin:0;
+  color:#535353;
+  font-size: 0.8em;
+}
+
+.date {
+  font-weight: bold;
+}
+
+h1 {
+  color: #1F4F82;
+  font-size: 2.5em;
+}
+
+.headlineimage {
+  float: left;
+}
+
+.newsitem {
+  position: relative;
+  left: 10px;
+  top: -15px;
+  width: 245px;
+  float: left;
+  font-size: 1.09em;
+}
+
+.newsitem a {
+  color: #1F54A5;
+}
+
+ a {
+   text-decoration: none;
+ }
+
+a:hover {
+  text-decoration: underline;
+}
+
+.video {
+  background-image: url("images/playbtn.png");
+  background-repeat: no-repeat;
+  background-position: left center;
+  padding-left: 20px;
+}
+
+.audio {
+  background-image: url("images/audiobtn.png");
+  background-repeat: no-repeat;
+  background-position: left center;
+  padding-left: 20px;
+}
+
+.links {
+  line-height: 1.5em;
+}
+
+#watchlisten {
+  float: right;
+  background-color: #EEEEEE;
+  width: 337px;
+  position: relative;
+  padding: 0;
+ left: -45px;
+ top: -100px
+}
+#watchlisten ul {
+    list-style-image: url('images/live.png');
+}
+h2 {
+  color: #505050;
+  margin: 10px 0 0 10px;
+  font-size: 2em;
+}
+ #boxes {
+   float: right;
+   margin: -15px 12px 0 0;
+ }
+
+ #orangebox {
+   width: 8px;
+   height: 8px;
+   background-color: orange;
+   float: left;
+   margin-right: 2px;
+ }
+
+ #greybox {
+   width: 8px;
+   height: 8px;
+   background-color: #342D1B;
+   float: left;
+   margin-right: 2px;
+ }
+
+.wlblock {
+   float: left;
+   border-right: 1px white solid;
+   background-color: #D1700E;
+   width: 143px;
+   overflow: hidden;
+   margin: 0;
+ }
+
+ .endwlblock {
+    float: right;
+    border-right: 1px white solid;
+    background-color: #D1700E;
+    width: 48px;
+    overflow: hidden;
+
+  }
+
+ .wlblock  a {
+   color: white;
+ }
+
+ .endwlblock  a {
+   color: white;
+ }
+
+ .wlblock p {
+   margin: 0;
+   padding: 2px;
+ }
+
+ .endwlblock p {
+   margin: 0;
+   padding: 2px;
+ }
+
+ #radio {
+   padding: 5px 0 5px 5px;
+ }
+
+ #radio img {
+   padding-top:10px;
+ }
+
+ #radio a {
+   position: relative;
+   top: -3px;
+ }
+
+</style>
+</head>
+
+<body>
+<div id="container">
+  <div id="topnav">
+    <div class="fixedwidth">
+       <div id="logodiv">
+         <img src="images/logo.png" />
+       </div>
+       <div id="signindiv">
+       </div>
+
+       <div id="topmenudiv">
+
+       <ul>
+           <li>News</li>
+           <li>Sport</li>
+           <li>Weather</li>
+           <li>iplayer</li>
+           <li>TV</li>
+           <li>Radio</li>
+           <li>More...</li>
+       </ul>
+       </div>
+          <div id="searchdiv">
+             <input type="text" placeholder="Search"/>
+          </div>
+    </div>
+  </div>
+  <div class="break"></div>
+  <div id="newsnav">
+    <div class="fixedwidth">
+      <p id="newsheader">NEWS <span id="uk">UK</span></p>
+         <div id="rssdiv">
+           rss <img src="images/rss.png" />
+         </div>
+         <div class="break"></div>
+         <div id="topicmenu">
+           <ul>
+               <li>Home</li>
+               <li>World</li>
+               <li class="selected">UK</li>
+               <li>England</li>
+               <li>N Ireland</li>
+               <li>Scotland</li>
+               <li>Wales</li>
+               <li>Business</li>
+               <li>Tech</li>
+               <li>Science</li>
+               <li>Health</li>
+               <li>Education</li>
+               <li>Entertainment &amp; Arts</li>
+               <li>Video &amp; Audio</li>
+               <li style="border-right:none">More</li>
+           </ul>
+         </div>
+    </div>
+  </div>
+  <div class="break"></div>
+  <div id="content">
+    <div class="fixedwidth">
+      <p> <span class="date">2nd April 2014</span> Last updated 15:35</p>
+      <h1>Pollution To Spread Across England</h1>
+      <img class ="headlineimage" src="images/headlineimage.jpg" />
+      <div class="newsitem">
+      <p>Health warnings have been issued by the government as pollution
+        spreading across England is forecast to hit high levels.</p>
+        <p class="links"><a class="video" href="">Why are pollution levels so high?</a><br />
+           <a class="video" href="">Saharan dust visible on cars</a><br />
+           <a class="video" href="">How Saharan dust reached the UK</a><br />
+           <a href="">What will pollution do to us?</a><br />
+           <a class="audio" href="">Air pollution a 'serious issue'</a></p>
+      </div>
+      <div id="watchlisten">
+        <h2>Watch/Listen</h2>
+            <div id="boxes">
+               <div id="orangebox"></div>
+               <div id="greybox"></div>
+               <div id="greybox"></div>
+               <div id="greybox"></div>
+           </div>
+           <div class="wlblock">
+             <img src="images/letter.png" />
+             <p><a href="">Titanic letter could fetch £100,000</a></p>
+          </div>
+          <div class="wlblock">
+            <img src="images/mail.png" />
+            <p><a href="">The housing estate delivering its own mail</a></p>
+         </div>
+         <div class="endwlblock">
+           <img src="images/faces.png" />
+           <p><a href="">Hillsborough police</a></p>
+        </div>
+        <div id="radio">
+        <img src="images/live.png" />
+          <a>BBC News Channel</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

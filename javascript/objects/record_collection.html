@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title></title>
+</head>
+
+<body>
+  <form id="myForm">
+    Artist:
+    <input type="text" name="artist" placeholder="Artist Name" id='artist'> Album:
+    <input type="text" name="album" placeholder="Album Title" id='album'> Released:
+    <input type="text" name="released" placeholder="Released Date" id="released"> CD:
+    <input type=checkbox name='CD' id='CD'> LP:
+    <input type=checkbox name='LP' id='LP'> 8T:
+    <input type=checkbox name='ET' id='8T'> CC:
+    <input type=checkbox name='CC' id='CC'> MP3:
+    <input type=checkbox name='MP3' id='MP3'>
+    <input type=submit id="submit" value="Enter New Record">
+  </form>
+  <div>
+    <ul id="records"></ul>
+  </div>
+  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js">
+  </script>
+  <!-- Include all compiled plugins (below), or include individual files as needed -->
+  <script src="js/bootstrap.min.js"></script>
+
+  <script>
+  myRecords = [];
+  key = "recordCollection";
+    window.onload = function() {
+      var update = document.getElementById('submit');
+      update.onclick = createNewRecord;
+      if (!window.localStorage) {
+    		alert("The Web Storage API is not supported.");
+    	}
+    	else {
+    		loadNotes();
+    	}
+    }
+
+    //This the constructor for the Record object
+    function Record(artist, albumTitle, releaseDate, format) {
+      this.artist = artist;
+      this.albumTitle = albumTitle;
+      this.releaseDate = releaseDate;
+      this.format = format;
+    }
+    //This creates instances of the Record object and puts them into the myRecords array
+
+
+    //This sets up the availableFormats method for the Records object
+    Record.prototype.availableFormats =
+      function() {
+        var format = this.format;
+        var formats = " Available in the following formats: ";
+        var numElements = format.length;
+        for (var i = 0; i < numElements; i++) {
+          formats = formats + ' ' + format[i];
+        }
+        return formats;
+      }
+
+    //This creates a new object and pushes it into the myRecords array
+    function createNewRecord() {
+      var artist = document.getElementById('artist').value;
+      var album = document.getElementById('album').value;
+      var released = document.getElementById('released').value;
+      //Move the form data into a mew record object
+      var myRecord = new Record();
+      myRecord.artist = artist;
+      myRecord.albumTitle = album;
+      myRecord.releaseDate = released;
+      myRecord.format = createFormatsArray();
+      myRecords.push(myRecord);
+      //Use the viewData method to display a record
+      //record.viewData();
+
+      showRecords(myRecord);
+      //push the checked formats into an array
+      function createFormatsArray() {
+        var formats = [];
+        var formatIds = ["CD", "LP", "8T", "CC", "MP3"];
+        if (document.getElementById('myForm').CD.checked) {
+          formats.push("CD");
+        }
+        if (document.getElementById('myForm').LP.checked) {
+          formats.push("LP");
+        }
+        if (document.getElementById('myForm').ET.checked) {
+          formats.push("8T");
+        }
+        if (document.getElementById('myForm').CC.checked) {
+          formats.push("CC");
+        }
+        if (document.getElementById('myForm').MP3.checked) {
+          formats.push("MP3");
+        }
+        return formats;
+      }
+    }
+
+    function showRecords(myRecord) {
+      var artist = myRecord.artist;
+      var album = myRecord.albumTitle;
+      var released = myRecord.releaseDate;
+      var recordsUl = document.getElementById('records');
+      var li = document.createElement("li");
+      var recordText = 'Artist: ' + artist + ' Album: ' + album + ' Released: ' + released + myRecord.availableFormats();
+      li.innerHTML = recordText;
+      //alert(li.innerHTML);
+      if (recordsUl.childElementCount > 0) {
+        recordsUl.insertBefore(li, recordsUl.firstChild);
+      } else {
+        recordsUl.appendChild(li);
+      }
+    }
+    alert(myRecords[0].format);
+  </script>
+</body>
+
+</html>
